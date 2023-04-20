@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib
 import tushare as ts
-pro = ts.pro_api('8b334e2d5d482292aa8b516c7f59dd6d23c0266dac3dc407dfb63ea1')
+pro = ts.pro_api('e16391ce58c09028930b9c77f4985f7e4d1c27e1366aded837122c9f')
 from 雪球 import *
 
 ## 指定默认字体
@@ -80,9 +80,9 @@ def single_jj_add(single_jj_id):
 
 
 def group_add_gp(gp_list, group_name):
-    # path = '/Users/liujiannan/Desktop/股票输入.csv'
+    path = '/Users/liujiannan/Desktop/股票输入.csv'
     # path = '/Users/liujiannan/etf.csv'
-    # gp_list = pd.read_csv(path)
+    gp_list = pd.read_csv(path)
     for i in gp_list['股票代码']:
         print(i)
         add_gp_to_group(i, group_name)
@@ -91,11 +91,13 @@ def group_add_gp(gp_list, group_name):
 
 
 if __name__ == "__main__":
-    single_jj_add('011966')
+    # single_jj_add('011966')
     # group_add_gp('ETF')
     # add_gp_to_group('SZ000725','ETF')
     # add_gp('SZ000725')
     # df = get_r_gp(gp())
     # group_add_gp(df, '银行')
     # print(df)
-
+    # group_add_gp('ETF')
+    # add_gp_group('重点关注')
+    group_add_gp('test', '重点关注')
