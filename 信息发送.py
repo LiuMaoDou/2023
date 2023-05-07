@@ -7,6 +7,7 @@ import requests
 import re
 import json
 import datetime
+from ted_funs import eastmoney
 
 key = '8b334e2d5d482292aa8b516c7f59dd6d23c0266dac3dc407dfb63ea1'
 pro = ts.pro_api(key)
@@ -19,59 +20,6 @@ headers = {
                   "Chrome/95.0.4638.69 Safari/537.36"}
 
 today = datetime.date.today().strftime('%Y-%m-%d')
-
-
-def eastmoney(url, data=None):
-    if data is None:
-        data = {}
-    result = requests.get(url, params=data)
-    pattern = re.compile(r'.*?\((.*)\).*', flags=re.S)
-    newR = pattern.sub("\g<1>", result.text)
-    newR2 = json.loads(newR)
-    return newR2
-
-
-def futures():
-    # 生猪 ###################
-    url = 'http://futsseapi.eastmoney.com/static/114_lh2209_mx/11?callbackName=jQuery35106817432867056272_1658586689857'
-    result = eastmoney(url)
-    pig = result['mx'][0]['p']
-    content = today + " : " + "生猪2209" + " --> " + str(pig)
-    send_message(content)
-
-    # 黄金 ##################
-    url = "http://futsseapi.eastmoney.com/list/variety/101/1"
-    data = {
-        'callbackName': 'jQuery35109938443184047594_1658587384610',
-        'orderBy': 'zdf',
-        'sort': 'desc',
-        'pageSize': '12',
-        'pageIndex': '0'
-    }
-    result = eastmoney(url, data)
-    gold = result['list'][0]['p']
-    content = today + " : " + "COMEX黄金" + " --> " + str(gold)
-    send_message(content)
-
-
-
-
-def bitcoin():
-    url = 'https://quotes.sina.cn/fx/api/openapi.php/BtcService.getMinKline?symbol=btcbtcusd&scale=1&datalen=1440' \
-          '&callback=var%20_btcbtcusd_1_1655561443342= '
-
-    result = eastmoney(url)
-    content = "比特币价格" + " : " + result['result']['data'][-1]['d'] + " --> " + result['result']['data'][-1]['c'] + ' USD'
-    send_message(content)
-
-
-def wti_oil():
-    url = 'https://stock2.finance.sina.com.cn/futures/api/openapi.php/GlobalFuturesService.getGlobalFuturesMinLine' \
-          '?symbol=CL&callback=var%20t1hf_CL= '
-    result = eastmoney(url)
-    content = "wti_oil" + " : " + result['result']['data']['minLine_1d'][-1][-1] \
-              + " --> " + result['result']['data']['minLine_1d'][-1][1] + " USD"
-    send_message(content)
 
 
 def daily_message(code):

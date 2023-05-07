@@ -2,6 +2,7 @@ from PIL import Image, ImageGrab
 from aip import AipOcr  # baidu-aip
 import os
 import pyperclip
+from tkinter import messagebox
 
 APP_ID = '21808493'
 API_KEY = 'xXUZ0xzi2b7LQgwoYilrulBE'
@@ -31,4 +32,4 @@ if __name__ == "__main__":
         # lst.append(i['words'])
     print(xxy)
     pyperclip.copy(xxy)
-
+    messagebox.showinfo('股票', '...完成任务...')
