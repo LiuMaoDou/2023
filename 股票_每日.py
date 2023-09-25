@@ -37,4 +37,10 @@ webbrowser.open(url)
 url = "https://data.eastmoney.com/bkzj/hy.html"
 webbrowser.open(url)
 
+url = 'https://www.google.com/finance/quote/BTC-USDT'
+webbrowser.open(url)
+
+url = 'https://xueqiu.com/today#/livenews'
+webbrowser.open(url)
+
 messagebox.showinfo('提示', '结束')
